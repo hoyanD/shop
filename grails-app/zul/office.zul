@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+    <?component name="statuspanel" macroURI="statuspanel.zul"?>
+
+    <statuspanel width="100%"/>
+
+    <window apply="shop.OfficeComposer" width="100%" height="96%">
+
+        <tabbox id="tb" height="100%" width="100%">
+            <tabs id="tabs" width="10%">
+                <tab id="A" label="Tab A" />
+                <tab id="B" label="Tab B" />
+                <tab id="C" label="Tab C" />
+                <tab id="D" label="Tab D" />
+                <tab id="E" label="Tab E" />
+            </tabs>
+            <tabpanels>
+                <tabpanel>
+                    <button label="Yes"/>
+                </tabpanel>
+                <tabpanel>This is panel B</tabpanel>
+                <tabpanel>This is panel C</tabpanel>
+                <tabpanel>This is panel D</tabpanel>
+                <tabpanel>This is panel E</tabpanel>
+            </tabpanels>
+        </tabbox>
+
+    </window>
+
+</zk>

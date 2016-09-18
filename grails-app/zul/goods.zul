@@ -1,0 +1,26 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window apply="shop.GoodsComposer" mode="popup" id="modalDialog" title="Coffee Order" border="normal" width="1000px"
+            position="center,center" closable="true"
+            action="show: slideDown;hide: slideUp">
+    <grid>
+        <rows>
+            <row align="center">
+                <label id="l1"/>
+            </row>
+            <row align="center">
+                <image id="image"/>
+            </row>
+            <row align="center">
+                <textbox id="tb" width="100%" readonly="true"/>
+            </row>
+            <row align="center">
+                <label id="l2"/>
+            </row>
+        </rows>
+    </grid>
+    </window>
+</zk>

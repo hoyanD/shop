@@ -1,0 +1,25 @@
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window apply="shop.StatuspanelComposer" height="3%">
+        <panel>
+            <panelchildren>
+                <hbox pack="end" width="100%">
+                    <button id="log" href="/login/auth" label="Ввійти" visible="false"/>
+                    <separator/>
+                    <button id="reg" label="Реєстрація" visible="false"/>
+                    <separator />
+                    <button id="conf" label="Персональна сторінка" href="/office.zul" visible="false"/>
+                    <separator/>
+                    <label id="lReg" value="Ввійдіть, аба зареєструйтесь будь-ласка." visible="false"/>
+                    <label id="lUser" visible="false"/>
+                    <separator/>
+                    <a visible="false" href="j_spring_security_logout" id="lbLogout" label="Вийти" />
+                </hbox>
+            </panelchildren>
+        </panel>
+    </window>
+</zk>
