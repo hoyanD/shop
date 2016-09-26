@@ -20,6 +20,13 @@
             <row align="center">
                 <label id="l2"/>
             </row>
+            <row>
+                <hbox pack="center" width="100%">
+                    <listbox id="list" mold="select" rows="1"/>
+                    <separator/>
+                    <button label="В корзину" id="buy"/>
+                </hbox>
+            </row>
         </rows>
     </grid>
     </window>

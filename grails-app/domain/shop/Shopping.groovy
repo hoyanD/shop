@@ -7,6 +7,10 @@ class Shopping {
     int count
     Date date
     String state
+    String address
+    String person
+    String phone
+    int price
 
     static constraints = {
         goods(nullable: false)
@@ -16,6 +20,6 @@ class Shopping {
     }
 
     String toString(){
-        goods + " " + physician
+        goods.toString() + " " + physician.toString()
     }
 }

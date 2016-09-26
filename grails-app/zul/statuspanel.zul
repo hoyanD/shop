@@ -4,10 +4,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-    <window apply="shop.StatuspanelComposer" height="3%">
+    <window apply="shop.StatuspanelComposer" id="window">
+        <timer id="timer" delay="5000" repeats="false"/>
         <panel>
             <panelchildren>
                 <hbox pack="end" width="100%">
+                    <label id="yes" value="Товар додано в корзину!" visible="false" style="color: green;"/>
+                    <separator/>
+                    <label id="count" visible="false"/>
+                    <image width="25px" visible="false" height="25px" id="img" src="http://localhost:8080/shop/images/shopping.jpg"/>
+                    <separator/>
                     <button id="log" href="/login/auth" label="Ввійти" visible="false"/>
                     <separator/>
                     <button id="reg" label="Реєстрація" visible="false"/>

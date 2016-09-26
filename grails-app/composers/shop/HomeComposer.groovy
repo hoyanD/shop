@@ -1,5 +1,6 @@
 package shop
 
+import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.event.Event
 import org.zkoss.zk.ui.event.EventListener
@@ -21,6 +22,7 @@ class HomeComposer extends zk.grails.Composer {
     def Grid grid
     def Window window
     def Window modal
+    def Component stPnl
 
     def showGoods(String str){
 
@@ -48,7 +50,11 @@ class HomeComposer extends zk.grails.Composer {
                 void onEvent(Event event) throws Exception {
                     if(modal != null) { modal.onClose() }
                     Map arg = new HashMap();
-                    arg.put("val", e);
+                    arg.put("val", e)
+                    arg.put("yes", stPnl.getFellow('window').getFellow('yes'))
+                    arg.put("timer", stPnl.getFellow('window').getFellow('timer'))
+                    arg.put("count", stPnl.getFellow('window').getFellow('count'))
+                    arg.put("img", stPnl.getFellow('window').getFellow('img'))
                     modal = (Window)Executions.createComponents("goods.zul", window, arg);
                 }
             })
