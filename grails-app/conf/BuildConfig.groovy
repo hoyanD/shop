@@ -46,7 +46,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
 
         mavenRepo "http://dl.bintray.com/zkgrails/release"
-        mavenRepo  "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/"
+        mavenRepo "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/"
       }
 
     dependencies {

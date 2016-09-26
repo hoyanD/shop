@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 5.5.0  -->
+<!-- 2016-09-26T10:57:35 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="goods" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5ecf94f-ccff-4c51-8088-4c520bf5cb0e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="address" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="phone" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="date" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="price" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="person" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="goods" class="java.lang.String" isForPrompting="false"/>
+	<detail>
+		<band height="421">
+			<staticText>
+				<reportElement x="20" y="30" width="91" height="31" uuid="43eb61f7-3fb2-4a92-aac8-d6c1ea115ac2"/>
+				<text><![CDATA[ПІБ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="80" width="91" height="31" uuid="78077eeb-114b-490f-9f32-a93895dc8541"/>
+				<text><![CDATA[Товар:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="130" width="91" height="31" uuid="ae55f792-c762-4e21-b525-863e646e6e36"/>
+				<text><![CDATA[Адреса:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="180" width="91" height="30" uuid="50a31350-ab7f-45d0-bd2a-cdcc10ce4f58"/>
+				<text><![CDATA[Ціна:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="230" width="91" height="30" uuid="7d8a5eea-be7d-416f-8640-d8098df009cc"/>
+				<text><![CDATA[Телефон:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="280" width="91" height="31" uuid="3f8313cd-6e57-4787-8266-612bb39cc285"/>
+				<text><![CDATA[Дата:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="30" width="141" height="31" uuid="944a07a6-ab28-4bd8-887c-14093ef1e2b5"/>
+				<textFieldExpression><![CDATA[$P{person}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="80" width="141" height="31" uuid="9bf86b72-9b85-4936-939a-3624c22d2f1f"/>
+				<textFieldExpression><![CDATA[$P{goods}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="130" width="141" height="31" uuid="19173fc0-15fb-43c8-926c-3c8311f14413"/>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="180" width="141" height="31" uuid="47cc8eac-7f35-45b6-870d-cb2f00f8689b"/>
+				<textFieldExpression><![CDATA[$P{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="230" width="141" height="31" uuid="5bba3028-9f99-469e-a459-6deccb0798cb"/>
+				<textFieldExpression><![CDATA[$P{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="280" width="141" height="31" uuid="7331222f-20d7-468a-ab9e-2341e0e1559e"/>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

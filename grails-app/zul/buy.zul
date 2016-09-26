@@ -1,0 +1,87 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window apply="shop.BuyComposer"  mode="popup" id="modalDialog" title="Coffee Order" border="normal" width="1000px"
+            position="center,center" closable="true" action="show: slideDown; hide: slideUp">
+
+        <hbox width="100%" pack="center">
+            <image width="100%" id="image"/>
+        </hbox>
+        <grid>
+            <rows>
+                <row align="center">
+                    <hbox pack="end" width="100%">
+                        <label value="Назва товару:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <label id="name"/>
+                    </hbox>
+                </row>
+                <row align="center">
+                    <hbox pack="end" width="100%">
+                        <label value="Опис:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox id="tb" width="100%" readonly="true" style="font-size:20px;" multiline="true" sclass="text"/>
+                    </hbox>
+                </row>
+                <row align="center">
+                    <hbox pack="end" width="100%">
+                        <label value="Кількість:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <label id="count"/>
+                    </hbox>
+                </row>
+                <row align="center">
+                    <hbox pack="end" width="100%">
+                        <label value="Ціна:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <label id="price"/>
+                    </hbox>
+                </row>
+                <row align="center">
+                    <hbox pack="end" width="100%">
+                        <label value="Отримувач:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox id="userName"/>
+                    </hbox>
+                </row>
+                <row align="center">
+                    <hbox pack="end" width="100%">
+                        <label value="Адреса:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox id="address"/>
+                    </hbox>
+                </row>
+                <row align="center">
+                    <hbox pack="end" width="100%">
+                        <label value="Дата замовлення:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <datebox readonly="true" id="date" />
+                    </hbox>
+                </row>
+                <row align="center">
+                    <hbox pack="end" width="100%">
+                        <label value="Телефон:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox id="phone"/>
+                    </hbox>
+                </row>
+            </rows>
+        </grid>
+        <separator/>
+    <hbox width="100%" pack="center">
+        <button id="buy" label="Підтвердити"/>
+        <button id="report" label="Роздрукувати"/>
+    </hbox>
+    </window>
+
+</zk>
