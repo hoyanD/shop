@@ -32,7 +32,7 @@ class BuyComposer extends zk.grails.Composer {
     def onClick_report(){
         reportsService.serviceMethod(shopping)
 
-        Filedownload.save("reports/printed-files/" + shopping.getGoods().getName() + ".html", null)
+        Filedownload.save("reports/printed-files/" + shopping.getGoods().getName() + ".pdf", null)
     }
 
     def onClick_buy() {

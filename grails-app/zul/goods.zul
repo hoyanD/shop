@@ -5,7 +5,7 @@
 
     <window apply="shop.GoodsComposer" mode="popup" id="modalDialog" title="Coffee Order" border="normal" width="1000px"
             position="center,center" closable="true"
-            action="show: slideDown;hide: slideUp">
+            action="show: slideDown; hide: slideUp">
     <grid>
         <rows>
             <row align="center">

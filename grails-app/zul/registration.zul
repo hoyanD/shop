@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window apply="shop.RegistrationComposer">
+        <hbox pack="center" width="100%">
+            <label value="Зареєструйтесь будь-ласка!"/>
+        </hbox>
+        <separator/>
+        <grid>
+            <rows>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Логін:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox constraint="no empty" id="login" type="text"/>
+                        <separator/>
+                        <label id="labLog" visible="false" value="Такий логін уже існує!" style="color: red;"/>
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Пароль:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox constraint="no empty" id="password" type="password"/>
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Повторіть пароль:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox constraint="no empty" id="repPassword" type="password"/>
+                        <separator/>
+                        <label id="labPass" visible="false" value="Не вірно!" style="color: red;"/>
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Фамілія:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox constraint="no empty" id="lastName" type="text"/>
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Ім'я:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox constraint="no empty" id="firstName" type="text"/>
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="По батькові:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox constraint="no empty" id="middleName" type="text"/>
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Електронна адреса:"/>
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox constraint="no empty" id="email" type="email"/>
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Адреса:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <textbox constraint="no empty" id="address" type="text"/>
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Дата народження:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <datebox constraint="no empty" id="date" />
+                    </hbox>
+                </row>
+                <row>
+                    <hbox pack="end" width="100%">
+                        <label value="Телефон:" />
+                    </hbox>
+                    <hbox pack="start">
+                        <intbox constraint="no empty" id="phone"/>
+                    </hbox>
+                </row>
+            </rows>
+        </grid>
+        <separator/>
+        <hbox pack="center" width="100%">
+            <button label="Зареєструватися" id="reg"/>
+        </hbox>
+    </window>
+</zk>

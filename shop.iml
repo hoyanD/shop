@@ -81,6 +81,9 @@
           <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/2.9.0/ehcache-2.9.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.2.9.RELEASE/spring-security-web-3.2.9.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.9.RELEASE/spring-security-core-3.2.9.RELEASE.jar!/" />
+          <root url="jar://C:/Grails/grails-2.3.11/lib/commons-collections/commons-collections/jars/commons-collections-3.2.1.jar!/" />
+          <root url="jar://C:/Grails/grails-2.3.11/lib/commons-validator/commons-validator/jars/commons-validator-1.3.1.jar!/" />
+          <root url="jar://C:/Grails/grails-2.3.11/lib/commons-el/commons-el/jars/commons-el-1.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.10-FINAL/poi-3.10-FINAL.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/olap4j/olap4j/0.9.7.309-JS-3/olap4j-0.9.7.309-JS-3.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/jakarta-regexp/jakarta-regexp/1.4/jakarta-regexp-1.4.jar!/" />

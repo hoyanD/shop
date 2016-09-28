@@ -9,7 +9,7 @@ grails.project.source.level = 1.6
 
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
-    //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+    // compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
 
     // configure settings for the test-app JVM, uses the daemon by default
     test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
@@ -40,6 +40,7 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
+
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -47,7 +48,7 @@ grails.project.dependency.resolution = {
 
         mavenRepo "http://dl.bintray.com/zkgrails/release"
         mavenRepo "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/"
-      }
+    }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.

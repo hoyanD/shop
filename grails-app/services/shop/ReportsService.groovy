@@ -2,11 +2,15 @@ package shop
 
 import grails.transaction.Transactional
 import net.sf.jasperreports.engine.JREmptyDataSource
+import net.sf.jasperreports.engine.JRExporterParameter
 import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperExportManager
 import net.sf.jasperreports.engine.JasperFillManager
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.engine.JasperReport
+import net.sf.jasperreports.engine.design.JRDesignStyle
+import net.sf.jasperreports.engine.export.JRPdfExporter
+import net.sf.jasperreports.engine.util.JRProperties
 
 @Transactional
 class ReportsService {
@@ -25,14 +29,27 @@ class ReportsService {
 
 //        JRPropertiesUtil
 
-        /*JRProperties.setProperty("net.sf.jasperreports.default.pdf.font.name", "Helvetica")
+       // JRProperties.setProperty("net.sf.jasperreports.default.pdf.font.name", "Helvetica")
         JRProperties.setProperty("net.sf.jasperreports.default.pdf.encoding", "UTF8")
-        JRProperties.setProperty("net.sf.jasperreports.default.pdf.embedded", "false")*/
+       // JRProperties.setProperty("net.sf.jasperreports.default.pdf.embedded", "false")
+
+        /*JRPdfExporter exporter = new JRPdfExporter();
+        exporter.setParameter(JRExporterParameter.CHARACTER_ENCODING, "UTF-8");*/
 
         JasperReport jasperReport = JasperCompileManager.compileReport(servletContext.getRealPath("/") + "reports/ua/goods.jrxml")
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, model, new JREmptyDataSource())
 
-        JasperExportManager.exportReportToHtmlFile(jasperPrint, servletContext.getRealPath("/") + "reports/printed-files/" + item.getGoods().getName() + ".html")
+        /*JRDesignStyle unicodeChars = new JRDesignStyle();
+        unicodeChars.setName("Unicode_Chars");
+        unicodeChars.setFontName("Arial");
+        unicodeChars.setFontSize(12);
+        unicodeChars.setItalic(true);
+        unicodeChars.setPdfFontName("Arial");
+        unicodeChars.setPdfEncoding("UTF-8");
+
+        jasperPrint.addStyle(unicodeChars)*/
+
+        JasperExportManager.exportReportToPdfFile(jasperPrint, servletContext.getRealPath("/") + "reports/printed-files/" + item.getGoods().getName() + ".pdf")
     }
 }

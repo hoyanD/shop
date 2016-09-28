@@ -16,7 +16,7 @@
                     <separator/>
                     <button id="log" href="/login/auth" label="Ввійти" visible="false"/>
                     <separator/>
-                    <button id="reg" label="Реєстрація" visible="false"/>
+                    <button id="reg" label="Реєстрація" href="/registration.zul" visible="false"/>
                     <separator />
                     <button id="conf" label="Персональна сторінка" href="/office.zul" visible="false"/>
                     <separator/>
