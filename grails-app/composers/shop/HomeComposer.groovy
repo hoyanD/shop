@@ -24,6 +24,7 @@ class HomeComposer extends zk.grails.Composer {
     def Window modal
     def Component stPnl
 
+
     def showGoods(String str){
 
         grid.removeChild(goods)

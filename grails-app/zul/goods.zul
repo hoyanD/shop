@@ -12,7 +12,22 @@
                 <label id="l1"/>
             </row>
             <row align="center">
-                <image id="image"/>
+                <hbox width="100%">
+                    <vbox height="100%" pack="center" width="50px">
+                        <image height="10%" width="100%" id="prev" src="/images/prev.png"/>
+                    </vbox>
+                    <vbox height="100%" width="900px">
+                        <image width="100%" id="image"/>
+                    </vbox>
+                    <vbox height="100%" pack="center" width="50px">
+                        <image height="10%" width="100%" id="next" src="/images/next.png"/>
+                    </vbox>
+                </hbox>
+            </row>
+            <row>
+                <grid width="100%" height="300px">
+                    <rows id="rows" />
+                </grid>
             </row>
             <row align="center">
                 <textbox id="tb" width="100%" readonly="true"/>

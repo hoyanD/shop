@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window apply="shop.AddgoodsComposer">
+        <vbox pack="center">
+            <grid>
+                <rows>
+                    <row>
+                        <hbox width="100%" pack="end">
+                            <label value="Категорія:"/>
+                        </hbox>
+                        <hbox pack="start">
+                            <listbox mold="select" rows="1" id="category"/>
+                        </hbox>
+                    </row>
+                    <row>
+                        <hbox width="100%" pack="end">
+                            <label value="Підкатегорія:"/>
+                        </hbox>
+                        <hbox pack="start">
+                            <listbox id="subcategory" mold="select" rows="1"/>
+                        </hbox>
+                    </row>
+                    <row>
+                        <hbox width="100%" pack="end">
+                            <label value="Назва:"/>
+                        </hbox>
+                        <hbox pack="start">
+                            <textbox id="name" />
+                        </hbox>
+                    </row>
+                    <row>
+                        <hbox width="100%" pack="end">
+                            <label value="Ціна:"/>
+                        </hbox>
+                        <hbox pack="start">
+                            <intbox id="price" />
+                        </hbox>
+                    </row>
+                    <row>
+                        <hbox width="100%" pack="end">
+                            <label value="Склад:"/>
+                        </hbox>
+                        <hbox pack="start">
+                            <intbox id="warehouse" />
+                        </hbox>
+                    </row>
+                </rows>
+            </grid>
+            <hbox pack="center" width="100%">
+                <label value="Опис:"/>
+            </hbox>
+
+            <textbox id="description" width="100%" rows="33"/>
+
+            <hbox pack="center" width="100%">
+                <button id="save" label="Зберегти"/>
+            </hbox>
+
+            <grid id="grid" width="100%" height="200px">
+                <rows id="rows"/>
+            </grid>
+
+            <hbox pack="center" width="100%">
+                <button disabled="true" id="upload" upload="true" label="Додати фото"/>
+            </hbox>
+
+        </vbox>
+    </window>
+</zk>
