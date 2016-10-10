@@ -1,10 +1,10 @@
 package shop
 
 import admin.User
-import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.event.Event
 import org.zkoss.zk.ui.event.EventListener
 import org.zkoss.zk.ui.event.Events
+import org.zkoss.zk.ui.event.KeyEvent
 import org.zkoss.zul.Button
 import org.zkoss.zul.Grid
 import org.zkoss.zul.Image
@@ -35,9 +35,12 @@ class GoodsComposer extends zk.grails.Composer {
     def counter = 0
     String path
     Foto foto
+    HashMap arr
 
     def onClick_next(){
         Iterator<Foto> it = goods.getFoto().iterator()
+
+        ((Grid)arr.get(foto)).setClass("no")
 
         while(it.hasNext()){
             if(it.next() == foto){
@@ -47,16 +50,23 @@ class GoodsComposer extends zk.grails.Composer {
                 }
             }
         }
+
+        ((Grid)arr.get(foto)).setClass("yes")
     }
 
     def onClick_prev(){
         def list = goods.getFoto()
+
+        ((Grid)arr.get(foto)).setClass("no")
+
         for(int i = 0; i < list.size(); i++){
             if(foto == list.getAt(i) && i > 0){
                 foto = list.getAt(i - 1)
                 image.setSrc(path + foto.getPath())
             }
         }
+
+        ((Grid)arr.get(foto)).setClass("yes")
     }
 
     def onClick_buy() {
@@ -102,8 +112,6 @@ class GoodsComposer extends zk.grails.Composer {
             timer.start()
             yes.setVisible(true)
         }
-
-        modalDialog.onClose()
     }
 
     def prepareWindow() {
@@ -135,6 +143,7 @@ class GoodsComposer extends zk.grails.Composer {
         list.setSelectedIndex(0)
     }
 
+
     def changeFoto(){
         foto.refresh()
 
@@ -143,6 +152,8 @@ class GoodsComposer extends zk.grails.Composer {
 
     def afterCompose = { modalDialog ->
         prepareWindow()
+
+        arr = new HashMap()
 
         def list = goods.getFoto()
         Row row = new Row()
@@ -156,10 +167,11 @@ class GoodsComposer extends zk.grails.Composer {
                 counter = 0
             }
 
-
             Grid grid1 = new Grid()
             grid1.setWidth("100px")
             grid1.setHeight("100px")
+
+            arr.put(e, grid1)
 
             Rows rows1 = new Rows()
             grid1.appendChild(rows1)
@@ -177,8 +189,13 @@ class GoodsComposer extends zk.grails.Composer {
             grid1.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
                 @Override
                 void onEvent(Event event) throws Exception {
+                    ((Grid)arr.get(foto)).setClass("no")
+
                     foto = e
+
                     changeFoto()
+
+                    ((Grid)arr.get(foto)).setClass("yes")
                 }
             })
 
@@ -186,5 +203,15 @@ class GoodsComposer extends zk.grails.Composer {
         }
 
         foto = list.getAt(0)
+
+        modalDialog.addEventListener(Events.ON_CTRL_KEY, new EventListener() {
+            public void onEvent(Event event) throws Exception {
+                if (((KeyEvent)event).getKeyCode() == 37){
+                    onClick_prev()
+                }else {
+                    onClick_next()
+                }
+            }
+        });
     }
 }

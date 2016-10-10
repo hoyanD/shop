@@ -5,7 +5,16 @@
 
     <window apply="shop.GoodsComposer" mode="popup" id="modalDialog" title="" border="normal" width="1000px"
             position="center,center" closable="true"
-            action="show: slideDown; hide: slideUp">
+            action="show: slideDown; hide: slideUp" focus="true" ctrlKeys="#left#right">
+        <style>
+            .yes {
+                background-color: yellow;
+            }
+
+            .no {
+                background-color: white;
+            }
+        </style>
     <grid>
         <rows>
             <row align="center">
@@ -13,12 +22,12 @@
             </row>
             <row>
                 <hbox pack="center" width="100%">
-                    <vbox height="100%" pack="center" width="50px" id="prev">
-                        <image height="25px" width="25px" src="/images/prev.png"/>
+                    <vbox height="100%" pack="center" width="50px" id="prev"  >
+                        <image height="50px" width="25px" src="/images/prev.png"/>
                     </vbox>
                     <image height="600px" width="700px" id="image"/>
                     <vbox height="100%" pack="center" width="50px" id="next">
-                        <image height="25px" width="25px" src="/images/next.png"/>
+                        <image height="50px" width="25px" src="/images/next.png"/>
                     </vbox>
                 </hbox>
             </row>
