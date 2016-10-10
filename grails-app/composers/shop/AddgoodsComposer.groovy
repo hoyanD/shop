@@ -16,6 +16,7 @@ class AddgoodsComposer extends zk.grails.Composer {
     def Listbox category
     def Listbox subcategory
     def Button upload
+    def Grid grid
     def Rows rows
     def Row row
     def servletContext
@@ -56,7 +57,7 @@ class AddgoodsComposer extends zk.grails.Composer {
         fos.write(media.getByteData());
         fos.close();
 
-        if(counter > 5) {
+        if(counter > 4) {
             row = new Row()
             rows.appendChild(row)
             counter = 0
@@ -80,6 +81,14 @@ class AddgoodsComposer extends zk.grails.Composer {
         row.appendChild(grid1)
 
         counter++
+
+        def list = Foto.findAllByGoods(goods)
+
+        double n = list.size()
+
+        n = (n % 5) == 0 ? (n / 5) : (n / 5) + 1
+
+        grid.setHeight((110 * n.intValue()).toString() + "px")
     }
 
     def onSelect_category(){

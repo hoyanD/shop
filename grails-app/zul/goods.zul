@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-    <window apply="shop.GoodsComposer" mode="popup" id="modalDialog" title="Coffee Order" border="normal" width="1000px"
+    <window apply="shop.GoodsComposer" mode="popup" id="modalDialog" title="" border="normal" width="1000px"
             position="center,center" closable="true"
             action="show: slideDown; hide: slideUp">
     <grid>
@@ -11,21 +11,19 @@
             <row align="center">
                 <label id="l1"/>
             </row>
-            <row align="center">
-                <hbox width="100%">
-                    <vbox height="100%" pack="center" width="50px">
-                        <image height="10%" width="100%" id="prev" src="/images/prev.png"/>
+            <row>
+                <hbox pack="center" width="100%">
+                    <vbox height="100%" pack="center" width="50px" id="prev">
+                        <image height="25px" width="25px" src="/images/prev.png"/>
                     </vbox>
-                    <vbox height="100%" width="900px">
-                        <image width="100%" id="image"/>
-                    </vbox>
-                    <vbox height="100%" pack="center" width="50px">
-                        <image height="10%" width="100%" id="next" src="/images/next.png"/>
+                    <image height="600px" width="700px" id="image"/>
+                    <vbox height="100%" pack="center" width="50px" id="next">
+                        <image height="25px" width="25px" src="/images/next.png"/>
                     </vbox>
                 </hbox>
             </row>
             <row>
-                <grid width="100%" height="300px">
+                <grid id="gridPhotos" width="100%">
                     <rows id="rows" />
                 </grid>
             </row>

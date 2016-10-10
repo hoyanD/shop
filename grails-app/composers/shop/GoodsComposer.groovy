@@ -14,6 +14,7 @@ import org.zkoss.zul.Row
 import org.zkoss.zul.Rows
 import org.zkoss.zul.Textbox
 import org.zkoss.zul.Timer
+import org.zkoss.zul.Vbox
 import org.zkoss.zul.Window
 
 class GoodsComposer extends zk.grails.Composer {
@@ -23,13 +24,14 @@ class GoodsComposer extends zk.grails.Composer {
     def Label l1
     def Label l2
     def Image image
-    def Image next
-    def Image prev
+    def Vbox next
+    def Vbox prev
     def Textbox tb
     def Listbox list
     def Button buy
     def springSecurityService
     def Rows rows
+    def Grid gridPhotos
     def counter = 0
     String path
     Foto foto
@@ -107,14 +109,20 @@ class GoodsComposer extends zk.grails.Composer {
     def prepareWindow() {
         goods = (Goods)arg.get("val")
 
+        double n = goods.getFoto().size()
+
+        n = (n % 5) == 0 ? (n / 5) : (n / 5) + 1
+
+        gridPhotos.setHeight((110 * n.intValue()).toString() + "px")
+
+        path = "images/" + goods.getSubCat().getCategory().getPath() + "/" + goods.getSubCat().getPath() + "/"
+
         l1.setValue(goods.getName())
         l2.setValue(goods.getPrice() + " грн.")
 
         tb.setValue(goods.getDescription())
 
-        image.setSrc("http://localhost:8080/shop/images/" + goods.getSubCat().getCategory().getPath() +"/" + goods.getSubCat().getPath() + "/" + goods.getFoto().find().getPath())
-        image.setWidth("80%")
-        image.setHeight("600px")
+        image.setSrc(path + goods.getFoto().find().getPath())
 
         list.append{
             for(int i = 1; i <= goods.getWarehouse(); i++){
@@ -135,9 +143,6 @@ class GoodsComposer extends zk.grails.Composer {
 
     def afterCompose = { modalDialog ->
         prepareWindow()
-
-        path = new String("http://localhost:8080/shop/images/" + goods.getSubCat().getCategory().getPath() + "/" + goods.getSubCat().getPath() + "/")
-
 
         def list = goods.getFoto()
         Row row = new Row()
