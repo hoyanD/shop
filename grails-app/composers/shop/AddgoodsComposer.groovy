@@ -7,7 +7,6 @@ import org.zkoss.zul.Grid
 import org.zkoss.zul.Image
 import org.zkoss.zul.Intbox
 import org.zkoss.zul.Listbox
-import org.zkoss.zul.Listitem
 import org.zkoss.zul.Row
 import org.zkoss.zul.Rows
 import org.zkoss.zul.Textbox
@@ -21,13 +20,13 @@ class AddgoodsComposer extends zk.grails.Composer {
     def Rows rows
     def Row row
     def servletContext
-    def counter = 0
     def Textbox name
     def Intbox warehouse
     def Intbox price
     def Button save
     def Textbox description
     def Goods goods
+    String path
 
     def onClick_save(){
         goods.setDescription(description.getValue())
@@ -35,64 +34,92 @@ class AddgoodsComposer extends zk.grails.Composer {
         goods.setWarehouse(warehouse.getValue())
         goods.setPrice(price.getValue())
         goods.setSubCat((Subcategory)subcategory.getSelectedItem().getValue())
-        goods.setSoldOut(0)
 
         goods.save(flush: true)
 
         upload.setDisabled(false)
+
+        path = "images/" + goods.getSubCat().getCategory().getPath() + "/" + goods.getSubCat().getPath() + "/"
     }
 
-    def onUpload_upload(UploadEvent event){
-        Media media = event.getMedia()
+    def updatePhotos(){
 
-        String path = servletContext.getRealPath("/") + "images/" + ((Category)category.getSelectedItem().getValue()).getPath() + "/" + ((Subcategory)subcategory.getSelectedItem().getValue()).getPath() + "/" + media.getName()
+        int counter = 0
 
-        Foto foto = new Foto()
-        foto.setPath(media.getName())
-        foto.setGoods(goods)
-        foto.save(flush: true)
+        grid.removeChild(rows)
 
-        FileOutputStream fos = new FileOutputStream(new File(path));
+        rows = new Rows()
 
-        fos.write(media.getByteData());
-        fos.close();
+        grid.appendChild(rows)
 
-        if(counter > 4) {
-            row = new Row()
-            rows.appendChild(row)
-            counter = 0
-        }
+        row = new Row()
 
-        Grid grid1 = new Grid()
-        grid1.setWidth("100px")
-        grid1.setHeight("100px")
+        rows.appendChild(row)
 
-        Rows rows1 = new Rows()
-        grid1.appendChild(rows1)
-
-        Row row1 = new Row()
-        Image img = new Image()
-        img.setContent(media)
-        img.setWidth("90px")
-        img.setHeight("90px")
-        row1.appendChild(img)
-        rows1.appendChild(row1)
-
-        row.appendChild(grid1)
-
-        counter++
+        goods.refresh()
 
         def list = Foto.findAllByGoods(goods)
+
+        list.each { e ->
+
+            if (counter > 4) {
+                row = new Row()
+                rows.appendChild(row)
+                counter = 0
+            }
+
+            Grid grid1 = new Grid()
+            grid1.setWidth("100px")
+            grid1.setHeight("100px")
+
+            Rows rows1 = new Rows()
+            grid1.appendChild(rows1)
+
+            Row row1 = new Row()
+            Image img = new Image()
+
+            img.setSrc(path + e.getPath())
+
+            img.setWidth("90px")
+            img.setHeight("90px")
+            row1.appendChild(img)
+            rows1.appendChild(row1)
+
+            row.appendChild(grid1)
+
+            counter++
+        }
 
         double n = list.size()
 
         n = (n % 5) == 0 ? (n / 5) : (n / 5) + 1
 
         grid.setHeight((110 * n.intValue()).toString() + "px")
+
+        System.out.println("end")
+    }
+
+    def onUpload_upload(UploadEvent event){
+        Media media = event.getMedia()
+
+        Foto foto = new Foto()
+        foto.setPath(media.getName())
+
+        goods.refresh()
+
+        foto.setGoods(goods)
+        foto.save(flush: true)
+
+        FileOutputStream fos = new FileOutputStream(new File(servletContext.getRealPath("/") + path + media.getName()));
+
+        fos.write(media.getByteData())
+        fos.close()
+
+        updatePhotos()
     }
 
     def onSelect_category(){
-        int count, rez
+        int count = 0, rez = 0
 
         subcategory.getChildren().clear()
 
@@ -100,15 +127,13 @@ class AddgoodsComposer extends zk.grails.Composer {
 
         cat.refresh()
 
-        count = rez = 0
-
         subcategory.append {
             cat.getSabCat().each { e ->
                 listitem(value: e){
                     listcell(label: e.getName())
                 }
 
-                if(e.getId() == goods.getSubCat().getId()){
+                if(goods.getSubCat() != null && e.getId() == goods.getSubCat().getId()){
                     rez = count
                 }
 
@@ -120,31 +145,34 @@ class AddgoodsComposer extends zk.grails.Composer {
     }
 
     def afterCompose = { window ->
-        int count, rez
+        int count = 0, rez = 0
 
         goods = (Goods)arg.get("goods")
-        goods.refresh()
 
-        if(goods == null)
-        {
+        if (goods == null) {
             goods = new Goods()
         } else {
+            goods.refresh()
+
             name.setValue(goods.getName())
             price.setValue(goods.getPrice())
             description.setValue(goods.getDescription())
             warehouse.setValue(goods.getWarehouse())
+            upload.setDisabled(false)
+
+            path = "images/" + goods.getSubCat().getCategory().getPath() + "/" + goods.getSubCat().getPath() + "/"
+
+            updatePhotos()
         }
 
         def list = Category.findAll()
-
-        count = rez = 0
 
         category.append {
             list.each { e ->
                 listitem(value: e) {
                     listcell(label: e.getName())
                 }
-                if(e.getId() == goods.getSubCat().getCategory().getId()){
+                if(goods.getSubCat() != null && e.getId() == goods.getSubCat().getCategory().getId()){
                     rez = count
                 }
 
@@ -152,14 +180,8 @@ class AddgoodsComposer extends zk.grails.Composer {
             }
         }
 
-        System.out.println(rez)
-
         category.setSelectedIndex(rez)
 
         onSelect_category()
-
-        row = new Row()
-
-        rows.appendChild(row)
     }
 }
