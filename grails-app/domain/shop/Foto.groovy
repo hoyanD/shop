@@ -7,7 +7,7 @@ class Foto {
 
     static constraints = {
         path(nullable: false)
-        goods(nullable: false)
+        goods(nullable: true)
     }
 
     String toString(){

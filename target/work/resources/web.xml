@@ -280,12 +280,12 @@
     <url-pattern>/grails-errorhandler</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>grails</servlet-name>
-    <url-pattern>*.dispatch</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>image</servlet-name>
     <url-pattern>/reports/image</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>grails</servlet-name>
+    <url-pattern>*.dispatch</url-pattern>
   </servlet-mapping>
 
     <session-config>

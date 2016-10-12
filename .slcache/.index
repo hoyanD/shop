@@ -5916,3 +5916,6 @@ n:2606:org/fusesource/jansi/internal/Kernel32$KEY_EVENT_RECORD
 n:3516:org/zkoss/zul/Columns
 n:1602:org/zkoss/zul/Foot
 n:326:org/zkoss/zul/RowRenderer
+n:12631:org/zkoss/zul/Messagebox
+n:2018:org/zkoss/zul/Messagebox$Button
+n:897:org/zkoss/zul/Messagebox$ClickEvent

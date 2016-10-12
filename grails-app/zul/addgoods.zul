@@ -4,8 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-    <window apply="shop.AddgoodsComposer" mode="popup" position="center,center" closable="true"
-            action="show: slideDown; hide: slideUp" id="modal" width="75%">
+    <window apply="shop.AddgoodsComposer" mode="modal" position="center,center" closable="true"
+            action="show: slideDown; hide: slideUp" id="modal" width="75%" title=" ">
         <vbox pack="center">
             <grid>
                 <rows>

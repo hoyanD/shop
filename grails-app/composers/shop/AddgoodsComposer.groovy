@@ -1,12 +1,16 @@
 package shop
 
 import org.zkoss.util.media.Media
+import org.zkoss.zk.ui.event.Event
+import org.zkoss.zk.ui.event.EventListener
+import org.zkoss.zk.ui.event.Events
 import org.zkoss.zk.ui.event.UploadEvent
 import org.zkoss.zul.Button
 import org.zkoss.zul.Grid
 import org.zkoss.zul.Image
 import org.zkoss.zul.Intbox
 import org.zkoss.zul.Listbox
+import org.zkoss.zul.Messagebox
 import org.zkoss.zul.Row
 import org.zkoss.zul.Rows
 import org.zkoss.zul.Textbox
@@ -29,6 +33,26 @@ class AddgoodsComposer extends zk.grails.Composer {
     String path
 
     def onClick_save(){
+        String oldPath = path
+
+        path = "images/" + category.getSelectedItem().getValue().getPath() + "/" + subcategory.getSelectedItem().getValue().getPath() + "/"
+
+        if(subcategory.getSelectedItem().getValue().getId() != goods.getSubCat().getId()) {
+            FileOutputStream fos
+
+            goods.getFoto().each { e ->
+                File file = new File(servletContext.getRealPath("/") + oldPath + e.getPath())
+
+                fos = new FileOutputStream(new File(servletContext.getRealPath("/") + path + e.getPath()))
+
+                fos.write(file.getBytes())
+
+                file.delete()
+            }
+
+            fos.close()
+        }
+
         goods.setDescription(description.getValue())
         goods.setName(name.getValue())
         goods.setWarehouse(warehouse.getValue())
@@ -38,8 +62,14 @@ class AddgoodsComposer extends zk.grails.Composer {
         goods.save(flush: true)
 
         upload.setDisabled(false)
+    }
 
-        path = "images/" + goods.getSubCat().getCategory().getPath() + "/" + goods.getSubCat().getPath() + "/"
+    def deleteFoto(def id){
+        Foto foto = Foto.findById(id)
+
+        new File(servletContext.getRealPath("/") + path + foto.getPath()).delete()
+
+        foto.delete(flush: true)
     }
 
     def updatePhotos(){
@@ -58,7 +88,7 @@ class AddgoodsComposer extends zk.grails.Composer {
 
         goods.refresh()
 
-        def list = Foto.findAllByGoods(goods)
+        def list = goods.getFoto()
 
         list.each { e ->
 
@@ -71,6 +101,20 @@ class AddgoodsComposer extends zk.grails.Composer {
             Grid grid1 = new Grid()
             grid1.setWidth("100px")
             grid1.setHeight("100px")
+            grid1.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+                @Override
+                void onEvent(Event event) throws Exception {
+                    Messagebox.show("delete this ?", 'confirm', Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, [
+                            onEvent: { ev ->
+                                if(ev.data.intValue() == Messagebox.OK) {
+                                    deleteFoto(e.getId())
+
+                                    updatePhotos()
+                                }
+                            }
+                    ] as EventListener)
+                }
+            })
 
             Rows rows1 = new Rows()
             grid1.appendChild(rows1)
@@ -95,8 +139,6 @@ class AddgoodsComposer extends zk.grails.Composer {
         n = (n % 5) == 0 ? (n / 5) : (n / 5) + 1
 
         grid.setHeight((110 * n.intValue()).toString() + "px")
-
-        System.out.println("end")
     }
 
     def onUpload_upload(UploadEvent event){

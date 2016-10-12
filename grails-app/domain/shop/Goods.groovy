@@ -22,5 +22,5 @@ class Goods {
 
     String toString(){
         name
-    }
+}
 }
