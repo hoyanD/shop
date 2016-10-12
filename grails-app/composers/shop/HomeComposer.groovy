@@ -1,5 +1,7 @@
 package shop
 
+import admin.Role
+import admin.User
 import org.zkoss.zk.ui.Component
 import org.zkoss.zk.ui.Executions
 import org.zkoss.zk.ui.event.Event
@@ -23,6 +25,7 @@ class HomeComposer extends zk.grails.Composer {
     def Window window
     def Window modal
     def Component stPnl
+    def springSecurityService
 
 
     def showGoods(String str){
@@ -50,13 +53,36 @@ class HomeComposer extends zk.grails.Composer {
                 @Override
                 void onEvent(Event event) throws Exception {
                     if(modal != null) { modal.onClose() }
-                    Map arg = new HashMap();
-                    arg.put("val", e)
-                    arg.put("yes", stPnl.getFellow('window').getFellow('yes'))
-                    arg.put("timer", stPnl.getFellow('window').getFellow('timer'))
-                    arg.put("count", stPnl.getFellow('window').getFellow('count'))
-                    arg.put("img", stPnl.getFellow('window').getFellow('img'))
-                    modal = (Window)Executions.createComponents("goods.zul", window, arg);
+
+                    def principal = springSecurityService.principal
+                    User user = User.findByUsername(principal.username)
+                    def authority;
+
+                    if(user) { authority = user.getAuthorities() }
+
+                    boolean flag = false
+
+                    for (Role role : authority){
+                        if(role.getAuthority().equalsIgnoreCase("ROLE_ADMIN")){
+                            flag = true
+                        }
+                    }
+
+                    if(flag){
+                        HashMap arg = new HashMap()
+
+                        arg.put("goods", e)
+
+                        modal = (Window)Executions.createComponents("addgoods.zul", window, arg);
+                    }else {
+                        Map arg = new HashMap();
+                        arg.put("val", e)
+                        arg.put("yes", stPnl.getFellow('window').getFellow('yes'))
+                        arg.put("timer", stPnl.getFellow('window').getFellow('timer'))
+                        arg.put("count", stPnl.getFellow('window').getFellow('count'))
+                        arg.put("img", stPnl.getFellow('window').getFellow('img'))
+                        modal = (Window)Executions.createComponents("goods.zul", window, arg);
+                    }
                 }
             })
 

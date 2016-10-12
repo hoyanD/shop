@@ -7,6 +7,7 @@ import org.zkoss.zul.Grid
 import org.zkoss.zul.Image
 import org.zkoss.zul.Intbox
 import org.zkoss.zul.Listbox
+import org.zkoss.zul.Listitem
 import org.zkoss.zul.Row
 import org.zkoss.zul.Rows
 import org.zkoss.zul.Textbox
@@ -26,10 +27,9 @@ class AddgoodsComposer extends zk.grails.Composer {
     def Intbox price
     def Button save
     def Textbox description
-    def Goods goods = new Goods()
+    def Goods goods
 
     def onClick_save(){
-        if(!goods) { goods = new Goods() }
         goods.setDescription(description.getValue())
         goods.setName(name.getValue())
         goods.setWarehouse(warehouse.getValue())
@@ -92,35 +92,69 @@ class AddgoodsComposer extends zk.grails.Composer {
     }
 
     def onSelect_category(){
+        int count, rez
+
         subcategory.getChildren().clear()
 
         def cat = (Category)category.getSelectedItem().getValue()
 
         cat.refresh()
 
+        count = rez = 0
+
         subcategory.append {
             cat.getSabCat().each { e ->
                 listitem(value: e){
                     listcell(label: e.getName())
                 }
+
+                if(e.getId() == goods.getSubCat().getId()){
+                    rez = count
+                }
+
+                count++
             }
         }
 
-        subcategory.setSelectedIndex(0)
+        subcategory.setSelectedIndex(rez)
     }
 
     def afterCompose = { window ->
+        int count, rez
+
+        goods = (Goods)arg.get("goods")
+        goods.refresh()
+
+        if(goods == null)
+        {
+            goods = new Goods()
+        } else {
+            name.setValue(goods.getName())
+            price.setValue(goods.getPrice())
+            description.setValue(goods.getDescription())
+            warehouse.setValue(goods.getWarehouse())
+        }
+
         def list = Category.findAll()
+
+        count = rez = 0
 
         category.append {
             list.each { e ->
                 listitem(value: e) {
                     listcell(label: e.getName())
                 }
+                if(e.getId() == goods.getSubCat().getCategory().getId()){
+                    rez = count
+                }
+
+                count++
             }
         }
 
-        category.setSelectedIndex(0)
+        System.out.println(rez)
+
+        category.setSelectedIndex(rez)
 
         onSelect_category()
 
