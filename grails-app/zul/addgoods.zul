@@ -6,6 +6,7 @@
 
     <window apply="shop.AddgoodsComposer" mode="modal" position="center,center" closable="true"
             action="show: slideDown; hide: slideUp" id="modal" width="75%" title=" ">
+        <timer repeats="false" running="false" id="timer" delay="5000"/>
         <vbox pack="center">
             <grid>
                 <rows>

@@ -14,6 +14,7 @@ import org.zkoss.zul.Messagebox
 import org.zkoss.zul.Row
 import org.zkoss.zul.Rows
 import org.zkoss.zul.Textbox
+import org.zkoss.zul.Timer
 
 class AddgoodsComposer extends zk.grails.Composer {
 
@@ -30,27 +31,39 @@ class AddgoodsComposer extends zk.grails.Composer {
     def Button save
     def Textbox description
     def Goods goods
+    def Timer timer
+    def Set<String> deleteList = new TreeSet<String>()
     String path
+
+    def onTimer_timer(){
+        deleteList.each { e->
+            File file = new File(e)
+
+             file.delete()
+        }
+
+        deleteList = new TreeSet<String>()
+    }
 
     def onClick_save(){
         String oldPath = path
 
+        goods.refresh()
+
         path = "images/" + category.getSelectedItem().getValue().getPath() + "/" + subcategory.getSelectedItem().getValue().getPath() + "/"
 
         if(subcategory.getSelectedItem().getValue().getId() != goods.getSubCat().getId()) {
-            FileOutputStream fos
+         //   FileOutputStream fos
 
             goods.getFoto().each { e ->
                 File file = new File(servletContext.getRealPath("/") + oldPath + e.getPath())
 
-                fos = new FileOutputStream(new File(servletContext.getRealPath("/") + path + e.getPath()))
+                file.renameTo(new File(servletContext.getRealPath("/") + path + e.getPath()))
 
-                fos.write(file.getBytes())
 
-                file.delete()
             }
 
-            fos.close()
+            //fos.close()
         }
 
         goods.setDescription(description.getValue())
@@ -67,9 +80,15 @@ class AddgoodsComposer extends zk.grails.Composer {
     def deleteFoto(def id){
         Foto foto = Foto.findById(id)
 
-        new File(servletContext.getRealPath("/") + path + foto.getPath()).delete()
+       // File file = new File(servletContext.getRealPath("/") + path + foto.getPath())
 
-        foto.delete(flush: true)
+       // file.delete()
+
+      foto.delete(flush: true)
+
+        deleteList.add(servletContext.getRealPath("/") + path + foto.getPath())
+
+        timer.start()
     }
 
     def updatePhotos(){
@@ -187,6 +206,7 @@ class AddgoodsComposer extends zk.grails.Composer {
     }
 
     def afterCompose = { window ->
+
         int count = 0, rez = 0
 
         goods = (Goods)arg.get("goods")
